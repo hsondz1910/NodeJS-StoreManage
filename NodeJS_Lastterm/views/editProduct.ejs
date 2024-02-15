@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sửa Sản Phẩm - Shop Điện Tử</title>
+
+    <style>
+        /* Thêm màu cho header */
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1em;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            display: flex;
+        }
+
+        nav li {
+            margin-right: 1em;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        /* Thêm màu cho section */
+        section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Căn giữa theo chiều ngang */
+            align-items: center; /* Căn giữa theo chiều dọc */
+            padding: 2em;
+            background-color: #f4f4f4; /* Màu nền */
+        }
+
+        .product {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 1em;
+            margin: 1em;
+            width: 300px;
+        }
+
+        /* Thêm màu cho footer */
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Thêm màu cho form sửa sản phẩm */
+        form {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 2em;
+            width: 300px;
+            text-align: left; /* Căn trái nội dung trong form */
+            margin: auto; /* Để căn giữa theo chiều ngang */
+            margin-top: 2em; /* Khoảng cách giữa chữ và form */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5em;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.5em;
+            margin-bottom: 1em;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #333;
+            color: #fff;
+            padding: 0.5em 1em;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Shop Điện Tử</h1>
+        <nav>
+            <ul>
+                <li><a href="/products">Quản lý sản phẩm</a></li>
+                <li><a href="/employees">Quản lý nhân viên</a></li>
+                <li><a href="/customers">Quản lý khách hàng</a></li>
+                <!-- Thêm các liên kết khác tại đây -->
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+        <h2>Sửa thông tin sản phẩm</h2>
+        <!-- Form sửa sản phẩm -->
+        <form id="editForm" action="/products/edit/<%= product._id %>" method="PUT">
+            <input type="hidden" name="_method" value="PUT" />
+            
+            <label for="productName">Tên sản phẩm:</label>
+            <input type="text" id="productName" name="productName" value="<%= product.productName %>" required>
+
+            <label for="category">Danh mục:</label>
+            <input type="text" id="category" name="category" value="<%= product.category %>">
+
+            <label for="price">Giá:</label>
+            <input type="number" id="price" name="price" value="<%= product.price %>" required>
+
+            <label for="stockQuantity">Số lượng tồn kho:</label>
+            <input type="number" id="stockQuantity" name="stockQuantity" value="<%= product.stockQuantity %>" required>
+
+            <label for="barcode">Mã vạch:</label>
+            <input type="text" id="barcode" name="barcode" value="<%= product.barcode %>">
+
+            <button type="submit">Lưu Sửa Đổi</button>
+        </form>
+
+        <!-- Thông báo -->
+        <div id="successMessage" style="color: green; display: none;">Chỉnh sửa thành công!</div>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Shop Điện Tử. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var form = document.getElementById('editForm');
+            var successMessage = document.getElementById('successMessage');
+
+            form.addEventListener('submit', function (event) {
+                event.preventDefault();
+
+                var formData = new FormData(form);
+                var object = {};
+                formData.forEach(function(value, key){
+                    object[key] = value;
+                });
+                var json = JSON.stringify(object);
+
+                fetch(form.action, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: json,
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    successMessage.style.display = 'block';
+                    setTimeout(function () {
+                        window.location.href = '/products';
+                    }, 2000);
+                })
+                .catch(error => {
+                    console.error('Có lỗi xảy ra:', error);
+                });
+            });
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chủ - Shop Điện Tử</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* header {
+            background-color: #333;
+            color: #fff;
+            padding: 1em;
+            text-align: center;
+        } */
+
+        /* edit header */
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1em;
+            text-align: center;
+            display: flex;
+            justify-content: space-between; /* Phân chia đều các phần trong header */
+            align-items: center; /* Canh giữa theo chiều dọc */
+        }
+
+        nav ul {
+            list-style-type: none;
+            display: flex;
+        }
+
+        nav li {
+            margin-right: 1em;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        /* End edit header */
+
+        section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 2em;
+        }
+
+        .product {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 1em;
+            margin: 1em;
+            width: 300px;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1em;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Shop Điện Tử</h1>
+        <nav>
+            <ul>
+                <li><a href="/products">Quản lý sản phẩm</a></li>
+                <li><a href="/employees">Quản lý nhân viên</a></li>
+                <li><a href="/customers">Quản lý khách hàng</a></li>
+                <!-- Thêm các liên kết khác tại đây -->
+            </ul>
+        </nav>
+    </header>
+
+        <section>
+            <!-- Dữ liệu sản phẩm sẽ được đưa vào đây từ server -->
+            <% if (typeof code !== 'undefined' && code === 0) { %>
+                <% data.forEach(product => { %>
+                    <!-- Thêm dòng sau để kiểm tra giá trị của _id -->
+                    <!-- <script>console.log('ID sản phẩm:', '<%= product._id %>');</script> -->
+                
+                    <div class="product">
+                        <h2><%= product.productName %></h2>
+                        <p>Giá: <%= product.price %> VNĐ</p>
+                        <button>Mua Ngay</button>
+                        <button onclick="editProduct('<%= product._id %>')">Sửa</button>
+                        <button onclick="deleteProduct('<%= product._id %>')">Xóa</button>
+                    </div>
+                <% }); %>
+            <% } else if (typeof message !== 'undefined') { %>
+                <p>Error: <%= message %></p>
+            <% } else { %>
+                <p>Error: Unknown error</p>
+            <% } %>
+        </section>
+    </section>
+
+    <footer>
+        <p>&copy; 2023 Shop Điện Tử. All rights reserved.</p>
+    </footer>
+        
+    <script>
+        function editProduct(productId) {
+            if (!productId || productId.length !== 24) {
+                console.log('ID sản phẩm không hợp lệ');
+                return;
+            }
+            console.log('Chuyển hướng đến trang sửa sản phẩm:', `/products/edit/${productId}`);
+            window.location.href = `/products/edit/${productId}`;
+        }
+
+        function deleteProduct(productId) {
+            if (confirm('Bạn có chắc chắn muốn xóa sản phẩm này không?')) {
+                fetch(`/products/delete/${productId}`, {
+                    method: 'DELETE'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.code === 0) {
+                        alert('Sản phẩm đã được xóa thành công!');
+                        window.location.reload(); // Làm mới trang sau khi xóa
+                    } else {
+                        alert('Lỗi xảy ra khi xóa sản phẩm: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Có lỗi xảy ra:', error);
+                });
+            }
+        }
+
+    </script>
+    
+</body>
+</html>

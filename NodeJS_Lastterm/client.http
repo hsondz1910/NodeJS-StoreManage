@@ -1,0 +1,79 @@
+POST http://localhost:9090/users/register
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "password": "123456",
+    "email": "admin@gmail.com",
+    "role": "Admin",
+    "status": "Active"
+}
+
+###
+POST http://localhost:9090/users/register
+Content-Type: application/json
+
+{
+    "username": "phson",
+    "password": "123456",
+    "email": "phson@gmail.com",
+    "role": "Employee",
+    "status": "Active"
+}
+
+###
+POST http://localhost:9090/users/login
+Content-Type: application/json
+
+{
+    "username": "admin",
+    "password": "123456"
+}
+
+###
+POST http://localhost:9090/products
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MDMwMzA4MDcsImV4cCI6MTcwMzAzNDQwN30.DiwSO3wjvfKs23BTHUbvJbBezYDM0xCHpCeEYGII3HQ
+
+{
+    "productName": "Điện thoại thông minh XYZ",
+    "category": "Điện thoại di động",
+    "price": 5000000,
+    "stockQuantity": 100,
+    "barcode": "1234567890123"
+}
+
+
+###
+GET http://localhost:9090/products
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MDMwMzA0NzMsImV4cCI6MTcwMzAzNDA3M30.ARG5CJkMOFPDhC09wxZiS_uHBH9YwFO8cV-o-iB0opc
+
+###
+GET http://localhost:9090/products/65822f8dcfe665cc53e43343
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MDMwMzA0NzMsImV4cCI6MTcwMzAzNDA3M30.ARG5CJkMOFPDhC09wxZiS_uHBH9YwFO8cV-o-iB0opc
+
+###
+DELETE http://localhost:9090/products/65822f8dcfe665cc53e43343
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MDMwMzA0NzMsImV4cCI6MTcwMzAzNDA3M30.ARG5CJkMOFPDhC09wxZiS_uHBH9YwFO8cV-o-iB0opc
+
+###
+PUT http://localhost:9090/products/65822faecfe665cc53e43347
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJyb2xlIjoiQWRtaW4iLCJpYXQiOjE3MDMwMzA0NzMsImV4cCI6MTcwMzAzNDA3M30.ARG5CJkMOFPDhC09wxZiS_uHBH9YwFO8cV-o-iB0opc
+
+{
+    "productName": "Iphone 16 Pro Max",
+    "category": "Iphoen"
+}
+
+###
+POST http://localhost:9090/employees
+Content-Type: application/json
+Authorization: 
+
+{
+    "fullName": "Nguyễn Văn A",
+    "address": "123 Đường ABC, Quận 1, TP. Hồ Chí Minh",
+    "phone": "0123456789",
+    "email": "nguyenvana@example.com"
+}

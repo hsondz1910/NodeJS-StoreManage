@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Đăng nhập</title>
+        <style>
+            body {
+                font-family: 'Arial', sans-serif;
+                background-color: #f7f7f7; /* Màu nền mới giống với trang đăng ký */
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+
+            form {
+                background-color: #fff;
+                padding: 30px;
+                border-radius: 10px;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+                text-align: center;
+                max-width: 400px;
+                width: 100%;
+            }
+
+            h2 {
+                margin-bottom: 20px;
+                color: #27ae60; /* Màu văn bản mới giống với trang đăng ký */
+            }
+
+            label {
+                display: block;
+                margin-bottom: 8px;
+                text-align: left;
+                color: #333; /* Màu văn bản mới giống với trang đăng ký */
+            }
+
+            input {
+                width: calc(100% - 20px);
+                padding: 10px;
+                margin-bottom: 15px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+
+            button {
+                width: calc(100% - 20px);
+                padding: 10px;
+                background-color: #27ae60;
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            button:hover {
+                background-color: #2ecc71;
+            }
+        </style>
+    </head>
+    <body>
+        <form action="/users/login" method="POST">
+            <h2>Login</h2>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" />
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" />
+
+            <button type="submit">Đăng nhập</button>
+            <div
+                style="
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    margin-top: 3%;
+                "
+            >
+            </div>
+        </form>
+    </body>
+</html>
