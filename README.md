@@ -1,2 +1,2 @@
-## Xem video demo project tại:
-### Youtube: https://youtu.be/PoJ0DPKl70Y
+## Watch the project demo video here:
+### Youtube: https://short.com.vn/GqCX
